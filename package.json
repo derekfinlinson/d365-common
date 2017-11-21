@@ -1,0 +1,21 @@
+{
+  "name": "xrm-common",
+  "version": "1.0.0",
+  "description": "Common Dynamics 365 JavaScript Functions",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dynamics",
+    "365",
+    "xrm"
+  ],
+  "author": "Derek Finlinson",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/xrm": "^9.0.0",
+    "xrm-mock": "^2.0.9"
+  }
+}
