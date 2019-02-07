@@ -1,21 +1,35 @@
 {
-  "name": "xrm-common",
-  "version": "1.0.0",
+  "name": "d365-common",
+  "version": "0.0.0-development",
   "description": "Common Dynamics 365 JavaScript Functions",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/derekfinlinson/d365-common.git"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p .",
+    "semantic-release": "semantic-release --no-ci",
+    "commit": "git-cz"
   },
   "keywords": [
     "dynamics",
     "365",
-    "xrm"
+    "xrm",
+    "d365"
   ],
   "author": "Derek Finlinson",
-  "license": "MIT",
   "devDependencies": {
-    "@types/xrm": "^9.0.0",
-    "xrm-mock": "^2.0.9"
+    "@types/xrm": "^9.0.7",
+    "commitizen": "^3.0.5",
+    "cz-conventional-changelog": "^2.1.0",
+    "semantic-release": "^15.13.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

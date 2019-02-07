@@ -3,15 +3,53 @@
  * @param fieldName Name of field
  * @param requiredLevel Requirement level
  */
-export function setFieldRequirementLevel(fieldName: string, requiredLevel: Xrm.Page.RequirementLevel): void {
+export function setFieldRequirementLevel(fieldName: string, requiredLevel: Xrm.Page.RequirementLevel): boolean {
     const field: Xrm.Page.Attribute =
         Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
 
     if (field == null) {
-        return;
+        return false;
     }
 
     field.setRequiredLevel(requiredLevel);
+
+    return true;
+}
+
+/**
+ * Set a control's visibility
+ * @param controlName Name of control
+ * @param visible Visible
+ */
+export function setControlVisibility(controlName: string, visible: boolean): boolean {
+    const control: Xrm.Page.StandardControl =
+        Xrm.Page.getControl<Xrm.Page.StandardControl>(controlName);
+
+    if (control == null) {
+        return false;
+    }
+
+    control.setVisible(visible);
+
+    return true;
+}
+
+/**
+ * Set a control's label
+ * @param controlName Name of control
+ * @param label Label for control
+ */
+export function setControlLabel(controlName: string, label: string): boolean {
+    const control: Xrm.Page.StandardControl =
+        Xrm.Page.getControl<Xrm.Page.StandardControl>(controlName);
+
+    if (control == null) {
+        return false;
+    }
+
+    control.setLabel(label);
+
+    return true;
 }
 
 /**
@@ -19,14 +57,16 @@ export function setFieldRequirementLevel(fieldName: string, requiredLevel: Xrm.P
  * @param fieldName Name of field
  * @param value Default value
  */
-export function setDefaultValue(fieldName: string, value: any): void {
+export function setDefaultValue(fieldName: string, value: any): boolean {
     const field: Xrm.Page.Attribute = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
 
     if (field == null || field.getValue() != null) {
-        return;
+        return false;
     }
 
     field.setValue(value);
+
+    return true;
 }
 
 /**
@@ -36,12 +76,15 @@ export function setDefaultValue(fieldName: string, value: any): void {
  * @param uniqueId Unique Id for the message
  * @param timeout Timeout before clearing the notififcation
  */
-export function addFormNotification(message: string, level: Xrm.Page.ui.FormNotificationLevel, uniqueId: string, timeout: number = 10000): void  {
+export function addFormNotification(message: string, level: Xrm.Page.ui.FormNotificationLevel,
+    uniqueId: string, timeout: number = 10000): boolean  {
     Xrm.Page.ui.setFormNotification(message, level, uniqueId);
 
     setTimeout(() => {
         Xrm.Page.ui.clearFormNotification(uniqueId);
     }, timeout);
+
+    return true;
 }
 
 /**
@@ -50,12 +93,12 @@ export function addFormNotification(message: string, level: Xrm.Page.ui.FormNoti
  * @param fireOnChange Fire event after adding it
  * @param event Event to fire
  */
-export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm.Page.ContextSensitiveHandler): void {
+export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm.Page.ContextSensitiveHandler): boolean {
     const field: Xrm.Page.Attribute =
         Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
     if (field === null || field === undefined) {
-        return;
+        return false;
     }
 
     // Call actual event from an anonymous method to prevent issues with this
@@ -66,4 +109,6 @@ export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm
     if (fireOnChange) {
         field.fireOnChange();
     }
+
+    return true;
 }
