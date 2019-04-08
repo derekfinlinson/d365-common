@@ -56,8 +56,9 @@ export function setControlLabel(controlName: string, label: string): boolean {
  * Set a default value on a field
  * @param fieldName Name of field
  * @param value Default value
+ * @param fireOnChange Fire field on change event
  */
-export function setDefaultValue(fieldName: string, value: any): boolean {
+export function setDefaultValue(fieldName: string, value: any, fireOnChange?: boolean): boolean {
     const field: Xrm.Page.Attribute = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
 
     if (field == null || field.getValue() != null) {
@@ -65,6 +66,10 @@ export function setDefaultValue(fieldName: string, value: any): boolean {
     }
 
     field.setValue(value);
+
+    if (fireOnChange == true) {
+        field.fireOnChange();
+    }
 
     return true;
 }
@@ -107,6 +112,28 @@ export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm
     });
 
     if (fireOnChange) {
+        field.fireOnChange();
+    }
+
+    return true;
+}
+
+/**
+ * Set a value on a field
+ * @param fieldName Name of field
+ * @param value Value
+ * @param fireOnChange Fire field on change event
+ */
+export function setValue(fieldName: string, value: any, fireOnChange?: boolean): boolean {
+    const field: Xrm.Page.Attribute = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
+
+    if (field == null) {
+        return false;
+    }
+
+    field.setValue(value);
+
+    if (fireOnChange == true) {
         field.fireOnChange();
     }
 
