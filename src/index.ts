@@ -139,3 +139,13 @@ export function setValue(fieldName: string, value: any, fireOnChange?: boolean):
 
     return true;
 }
+
+/**
+ * Check if a field contains data
+ * @param fieldName Name of field
+ */
+export function fieldContainsData(fieldName: string): boolean {
+    const field: Xrm.Page.Attribute = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
+
+    return field != null && field.getValue() != null;
+}
