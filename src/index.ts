@@ -157,7 +157,7 @@ export function fieldContainsData(fieldName: string): boolean {
  * @param fieldName Name of control
  * @param disabled Disable or enable field
  */
-export function setControlDisabled(fieldName: string, allControls: boolean, disabled: boolean): boolean {
+export function setDisabled(fieldName: string, allControls: boolean, disabled: boolean): boolean {
     const control = Xrm.Page.getControl<Xrm.Page.StandardControl>(fieldName.toLowerCase());
 
     if (control == null) {
