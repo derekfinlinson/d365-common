@@ -4,8 +4,7 @@
  * @param requiredLevel Requirement level
  */
 export function setFieldRequirementLevel(fieldName: string, requiredLevel: Xrm.Page.RequirementLevel): boolean {
-    const field: Xrm.Page.Attribute =
-        Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
+    const field = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
     if (field == null) {
         return false;
@@ -21,15 +20,20 @@ export function setFieldRequirementLevel(fieldName: string, requiredLevel: Xrm.P
  * @param controlName Name of control
  * @param visible Visible
  */
-export function setControlVisibility(controlName: string, visible: boolean): boolean {
-    const control: Xrm.Page.StandardControl =
-        Xrm.Page.getControl<Xrm.Page.StandardControl>(controlName);
+export function setControlVisibility(controlName: string, allControls, visible: boolean): boolean {
+    const control = Xrm.Page.getControl<Xrm.Page.StandardControl>(controlName.toLowerCase());
 
     if (control == null) {
         return false;
     }
 
-    control.setVisible(visible);
+    if (allControls) {
+        control.getAttribute().controls.forEach((c: Xrm.Page.StandardControl) => {
+            c.setVisible(visible);
+        })
+    } else {
+        control.setVisible(visible);
+    }
 
     return true;
 }
@@ -40,8 +44,7 @@ export function setControlVisibility(controlName: string, visible: boolean): boo
  * @param label Label for control
  */
 export function setControlLabel(controlName: string, label: string): boolean {
-    const control: Xrm.Page.StandardControl =
-        Xrm.Page.getControl<Xrm.Page.StandardControl>(controlName);
+    const control = Xrm.Page.getControl<Xrm.Page.StandardControl>(controlName.toLowerCase());
 
     if (control == null) {
         return false;
@@ -59,7 +62,7 @@ export function setControlLabel(controlName: string, label: string): boolean {
  * @param fireOnChange Fire field on change event
  */
 export function setDefaultValue(fieldName: string, value: any, fireOnChange?: boolean): boolean {
-    const field: Xrm.Page.Attribute = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
+    const field = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
     if (field == null || field.getValue() != null) {
         return false;
@@ -99,8 +102,7 @@ export function addFormNotification(message: string, level: Xrm.Page.ui.FormNoti
  * @param event Event to fire
  */
 export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm.Page.ContextSensitiveHandler): boolean {
-    const field: Xrm.Page.Attribute =
-        Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
+    const field = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
     if (field === null || field === undefined) {
         return false;
@@ -125,7 +127,7 @@ export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm
  * @param fireOnChange Fire field on change event
  */
 export function setValue(fieldName: string, value: any, fireOnChange?: boolean): boolean {
-    const field: Xrm.Page.Attribute = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
+    const field = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
     if (field == null) {
         return false;
@@ -145,7 +147,47 @@ export function setValue(fieldName: string, value: any, fireOnChange?: boolean):
  * @param fieldName Name of field
  */
 export function fieldContainsData(fieldName: string): boolean {
-    const field: Xrm.Page.Attribute = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName);
+    const field = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
     return field != null && field.getValue() != null;
+}
+
+/**
+ * Disable/enable controls for a field
+ * @param fieldName Name of control
+ * @param disabled Disable or enable field
+ */
+export function setControlDisabled(fieldName: string, allControls: boolean, disabled: boolean): boolean {
+    const control = Xrm.Page.getControl<Xrm.Page.StandardControl>(fieldName.toLowerCase());
+
+    if (control == null) {
+        return false;
+    }
+
+    if (allControls) {
+        control.getAttribute().controls.forEach((c: Xrm.Page.StandardControl) => {
+            c.setDisabled(disabled);
+        });
+    } else {
+        control.setDisabled(disabled);
+    }
+
+    return true;
+}
+
+/**
+ * Add presearch event to lookup control
+ * @param fieldName Name of control
+ * @param handler Handler for presearch
+ */
+export function addPreSearch(fieldName: string, handler: Xrm.Events.ContextSensitiveHandler): boolean {
+    const field = Xrm.Page.getAttribute<Xrm.Page.LookupAttribute>(fieldName.toLowerCase());
+
+    if (field == null) {
+        return false;
+    }
+
+    field.controls.forEach((c: Xrm.Page.LookupControl) => {
+        c.addPreSearch(handler);
+    });
 }
