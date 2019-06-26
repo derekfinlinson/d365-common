@@ -108,14 +108,28 @@ export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm
         return false;
     }
 
-    // Call actual event from an anonymous method to prevent issues with this
-    field.addOnChange((context) => {
-        event(context);
-    });
+    field.addOnChange(event);
 
     if (fireOnChange) {
         field.fireOnChange();
     }
+
+    return true;
+}
+
+/**
+ * Remove an on change event from a field
+ * @param fieldName Name of field 
+ * @param event Event to fire
+ */
+export function removeOnChange(fieldName: string, event: Xrm.Page.ContextSensitiveHandler): boolean {
+    const field = Xrm.Page.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
+
+    if (field === null || field === undefined) {
+        return false;
+    }
+
+    field.removeOnChange(event);
 
     return true;
 }
