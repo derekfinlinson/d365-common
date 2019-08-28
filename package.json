@@ -23,9 +23,9 @@
   "author": "Derek Finlinson",
   "devDependencies": {
     "@types/xrm": "^9.0.14",
-    "commitizen": "^3.1.1",
+    "commitizen": "^3.1.2",
     "cz-conventional-changelog": "^2.1.0",
-    "semantic-release": "^15.13.17"
+    "semantic-release": "^15.13.24"
   },
   "config": {
     "commitizen": {
