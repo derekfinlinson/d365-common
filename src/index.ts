@@ -20,9 +20,10 @@ export function setFieldRequirementLevel(fieldName: string, requiredLevel: Xrm.P
 * Set a control's visibility
 * @param controlName Name of control
 * @param visible Visible
+* @param allControls Apply to all controls
 * @param form Form context
 */
-export function setControlVisibility(controlName: string, allControls, visible: boolean, form: Xrm.FormContext): boolean {
+export function setControlVisibility(controlName: string, allControls: boolean, visible: boolean, form: Xrm.FormContext): boolean {
   const control = form.getControl<Xrm.Page.StandardControl>(controlName.toLowerCase());
 
   if (control == null) {
@@ -215,4 +216,21 @@ export function addPreSearch(fieldName: string, handler: Xrm.Events.ContextSensi
   field.controls.forEach((c: Xrm.Page.LookupControl) => {
       c.addPreSearch(handler);
   });
+}
+
+/**
+ * Navigate to different form
+ * @param form Form context
+ * @param label Label of form to navigate to
+ */
+export function navigateToForm(form: Xrm.FormContext, label: string) {
+  const current = form.ui.formSelector.getCurrentItem();
+  
+  if (current.getLabel() !== label) {
+    form.ui.formSelector.items.forEach(f => {
+      if (f.getLabel() === label) {
+        f.navigate();
+      }
+    });
+  }
 }

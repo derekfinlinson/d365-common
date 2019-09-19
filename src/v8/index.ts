@@ -205,3 +205,19 @@ export function addPreSearch(fieldName: string, handler: Xrm.Events.ContextSensi
         c.addPreSearch(handler);
     });
 }
+
+/**
+ * Navigate to different form
+ * @param label Label of form to navigate to
+ */
+export function navigateToForm(label: string) {
+  const current = Xrm.Page.ui.formSelector.getCurrentItem();
+  
+  if (current.getLabel() !== label) {
+    Xrm.Page.ui.formSelector.items.forEach(f => {
+      if (f.getLabel() === label) {
+        f.navigate();
+      }
+    });
+  }
+}
