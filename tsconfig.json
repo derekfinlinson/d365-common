@@ -8,6 +8,7 @@
         "outDir": "dist"
     },
     "files": [
+        "src/v8/index.ts",
         "src/index.ts"
     ]
 }

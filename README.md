@@ -17,7 +17,15 @@ npm install --save-dev d365-common
 Import the module into your TypeScript/JavaScript files
 
 ```typescript
-import { setFieldRequirementLevel } from "d365-common";
+import { setFieldRequirementLevel } from 'd365-common';
 
-setFieldRequirementLevel("accountnumber", "required");
+setFieldRequirementLevel('accountnumber', 'required');
+```
+
+For Dynamics versions less than 9.0
+
+```typescript
+import { setFieldRequirementLevel } from 'd365-common\dist\v8\index';
+
+setFieldRequirementLevel('accountnumber', 'required');
 ```
