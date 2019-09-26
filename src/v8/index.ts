@@ -228,7 +228,7 @@ export function navigateToForm(label: string) {
  * @param attributeFilter Logical name of the attribute to filter on
  * @param values Values for the filter
  */
-export function filterLookup(lookupAttribute: string, attributeFilter: string, values: string[]): boolean {
+export function addLookupFilter(lookupAttribute: string, attributeFilter: string, values: string[]): boolean {
   if (values.length === 0) {
     return false;
   }
