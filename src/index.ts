@@ -234,3 +234,32 @@ export function navigateToForm(form: Xrm.FormContext, label: string) {
     });
   }
 }
+
+/**
+ * Filter lookup field
+ * @param form Form context
+ * @param lookupAttribute Logical name of attribute to which the filter will apply
+ * @param attributeFilter Logical name of the attribute to filter on
+ * @param values Values for the filter
+ */
+export function filterLookup(form: Xrm.FormContext, lookupAttribute: string, attributeFilter: string, values: string[]): boolean {
+  if (values.length === 0) {
+    return false;
+  }
+
+  const value = values.map(v => `<value>${v}</value>`);
+
+  const filter = [
+    "<filter>",
+    `<condition attribute='${attributeFilter}' operator='in'>`,
+    value,
+    "</condition>",
+    "</filter>"
+  ].join("");
+
+  form
+    .getAttribute<Xrm.Page.LookupAttribute>(lookupAttribute)
+    .controls.forEach(c => c.addCustomFilter(filter));
+
+    return true;
+}
