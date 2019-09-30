@@ -242,7 +242,7 @@ export function navigateToForm(form: Xrm.FormContext, label: string) {
  * @param attributeFilter Logical name of the attribute to filter on
  * @param values Values for the filter
  */
-export function addLookupFilter(form: Xrm.FormContext, lookupAttribute: string, attributeFilter: string, values: string[]): boolean {
+export function addLookupFilter(form: Xrm.FormContext, lookupAttribute: string, attributeFilter: string, values: any[]): boolean {
   if (values.length === 0) {
     return false;
   }
