@@ -8,7 +8,7 @@ export function setFieldRequirementLevel(fieldName: string, requiredLevel: Xrm.P
   const field = form.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
   if (field == null) {
-      return false;
+    return false;
   }
 
   field.setRequiredLevel(requiredLevel);
@@ -27,15 +27,15 @@ export function setControlVisibility(controlName: string, allControls: boolean, 
   const control = form.getControl<Xrm.Page.StandardControl>(controlName.toLowerCase());
 
   if (control == null) {
-      return false;
+    return false;
   }
 
   if (allControls) {
-      control.getAttribute().controls.forEach((c: Xrm.Page.StandardControl) => {
-          c.setVisible(visible);
-      })
+    control.getAttribute().controls.forEach((c: Xrm.Page.StandardControl) => {
+      c.setVisible(visible);
+    })
   } else {
-      control.setVisible(visible);
+    control.setVisible(visible);
   }
 
   return true;
@@ -51,7 +51,7 @@ export function setControlLabel(controlName: string, label: string, form: Xrm.Fo
   const control = form.getControl<Xrm.Page.StandardControl>(controlName.toLowerCase());
 
   if (control == null) {
-      return false;
+    return false;
   }
 
   control.setLabel(label);
@@ -70,13 +70,13 @@ export function setDefaultValue(fieldName: string, value: any, form: Xrm.FormCon
   const field = form.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
   if (field == null || field.getValue() != null) {
-      return false;
+    return false;
   }
 
   field.setValue(value);
 
   if (fireOnChange == true) {
-      field.fireOnChange();
+    field.fireOnChange();
   }
 
   return true;
@@ -91,11 +91,11 @@ export function setDefaultValue(fieldName: string, value: any, form: Xrm.FormCon
 * @param form Form context
 */
 export function addFormNotification(message: string, level: Xrm.Page.ui.FormNotificationLevel,
-  uniqueId: string, timeout: number = 10000, form: Xrm.FormContext): boolean  {
+  uniqueId: string, timeout: number = 10000, form: Xrm.FormContext): boolean {
   form.ui.setFormNotification(message, level, uniqueId);
 
   setTimeout(() => {
-      form.ui.clearFormNotification(uniqueId);
+    form.ui.clearFormNotification(uniqueId);
   }, timeout);
 
   return true;
@@ -112,13 +112,14 @@ export function addOnChange(fieldName: string, fireOnChange: boolean, event: Xrm
   const field = form.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
   if (field === null || field === undefined) {
-      return false;
+    return false;
   }
 
+  field.removeOnChange(event);
   field.addOnChange(event);
 
   if (fireOnChange) {
-      field.fireOnChange();
+    field.fireOnChange();
   }
 
   return true;
@@ -134,7 +135,7 @@ export function removeOnChange(fieldName: string, event: Xrm.Page.ContextSensiti
   const field = form.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
   if (field === null || field === undefined) {
-      return false;
+    return false;
   }
 
   field.removeOnChange(event);
@@ -153,13 +154,13 @@ export function setValue(fieldName: string, value: any, form: Xrm.FormContext, f
   const field = form.getAttribute<Xrm.Page.Attribute>(fieldName.toLowerCase());
 
   if (field == null) {
-      return false;
+    return false;
   }
 
   field.setValue(value);
 
   if (fireOnChange == true) {
-      field.fireOnChange();
+    field.fireOnChange();
   }
 
   return true;
@@ -186,15 +187,15 @@ export function setDisabled(fieldName: string, allControls: boolean, disabled: b
   const control = form.getControl<Xrm.Page.StandardControl>(fieldName.toLowerCase());
 
   if (control == null) {
-      return false;
+    return false;
   }
 
   if (allControls) {
-      control.getAttribute().controls.forEach((c: Xrm.Page.StandardControl) => {
-          c.setDisabled(disabled);
-      });
+    control.getAttribute().controls.forEach((c: Xrm.Page.StandardControl) => {
+      c.setDisabled(disabled);
+    });
   } else {
-      control.setDisabled(disabled);
+    control.setDisabled(disabled);
   }
 
   return true;
@@ -210,11 +211,11 @@ export function addPreSearch(fieldName: string, handler: Xrm.Events.ContextSensi
   const field = form.getAttribute<Xrm.Page.LookupAttribute>(fieldName.toLowerCase());
 
   if (field == null) {
-      return false;
+    return false;
   }
 
   field.controls.forEach((c: Xrm.Page.LookupControl) => {
-      c.addPreSearch(handler);
+    c.addPreSearch(handler);
   });
 }
 
@@ -225,7 +226,7 @@ export function addPreSearch(fieldName: string, handler: Xrm.Events.ContextSensi
  */
 export function navigateToForm(form: Xrm.FormContext, label: string) {
   const current = form.ui.formSelector.getCurrentItem();
-  
+
   if (current.getLabel() !== label) {
     form.ui.formSelector.items.forEach(f => {
       if (f.getLabel() === label) {
@@ -261,5 +262,5 @@ export function addLookupFilter(form: Xrm.FormContext, lookupAttribute: string, 
     .getAttribute<Xrm.Page.LookupAttribute>(lookupAttribute)
     .controls.forEach(c => c.addCustomFilter(filter));
 
-    return true;
+  return true;
 }

@@ -1,6 +1,6 @@
 {
   "name": "d365-common",
-  "version": "0.0.0-development",
+  "version": "2.2.3",
   "description": "Common Dynamics 365 JavaScript Functions",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,8 +11,9 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "semantic-release": "semantic-release --no-ci",
-    "commit": "git-cz"
+    "change": "beachball change",
+    "check": "beachball check",
+    "beachball:publish": "beachball publish"
   },
   "keywords": [
     "dynamics",
@@ -23,14 +24,7 @@
   "author": "Derek Finlinson",
   "devDependencies": {
     "@types/xrm": "^9.0.23",
-    "commitizen": "^3.1.2",
-    "cz-conventional-changelog": "^2.1.0",
-    "semantic-release": "^15.14.0",
+    "beachball": "^1.31.3",
     "typescript": "^3.8.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   }
 }

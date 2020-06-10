@@ -1,7 +1,7 @@
 # d365-common
-|Build|NPM|Semantic-Release|
-|-----|---|----------------|
-|[![Build Status](https://dev.azure.com/derekfinlinson/GitHub/_apis/build/status/derekfinlinson.d365-common?branchName=master)](https://dev.azure.com/derekfinlinson/GitHub/_build/latest?definitionId=7&branchName=master)|[![npm](https://img.shields.io/npm/v/d365-common.svg?style=flat-square)](https://www.npmjs.com/package/d365-common)|[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)|
+|Build|NPM|
+|-----|---|
+|[![Build Status](https://dev.azure.com/derekfinlinson/GitHub/_apis/build/status/derekfinlinson.d365-common?branchName=master)](https://dev.azure.com/derekfinlinson/GitHub/_build/latest?definitionId=7&branchName=master)|[![npm](https://img.shields.io/npm/v/d365-common.svg?style=flat-square)](https://www.npmjs.com/package/d365-common)|
 
 A Dynamics 365 module including common functions used in JavaScript web resource development.
 
