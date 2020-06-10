@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Remove on change event before adding",
+  "packageName": "d365-common",
+  "email": "dcfinlinson@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2020-06-10T18:08:55.833Z"
+}
