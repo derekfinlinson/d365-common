@@ -1,3 +1,5 @@
+# DEPRECATED Use [powerapps-common](https://github.com/derekfinlinson/powerapps-tools) instead #
+
 # d365-common
 |Build|NPM|
 |-----|---|
